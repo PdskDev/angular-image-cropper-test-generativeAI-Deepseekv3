@@ -1,0 +1,35 @@
+<h2>Add Image</h2>
+<form (ngSubmit)="onSave()">
+  <label for="titre">Titre:</label>
+  <input id="titre" [(ngModel)]="image.titre" name="titre" required />
+
+  <label for="description">Description:</label>
+  <textarea
+    id="description"
+    [(ngModel)]="image.description"
+    name="description"
+  ></textarea>
+
+  <label for="imageUpload">Upload Image:</label>
+  <input
+    id="imageUpload"
+    type="file"
+    (change)="fileChangeEvent($event)"
+    accept="image/*"
+  />
+
+  <div *ngIf="imageChangedEvent">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      (imageCropped)="imageCropped($event)"
+      format="png"
+    ></image-cropper>
+  </div>
+
+  <div *ngIf="croppedImage">
+    <h3>Cropped Image Preview:</h3>
+    <img [src]="croppedImage" alt="Cropped Image" style="max-width: 100%" />
+  </div>
+
+  <button type="submit">Save</button>
+</form>

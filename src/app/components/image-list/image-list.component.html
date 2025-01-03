@@ -1,0 +1,13 @@
+<h2>Image List</h2>
+<a routerLink="/add">Add New Image</a>
+<ul>
+  <li *ngFor="let image of images">
+    <img [src]="image.url" alt="{{ image.titre }}" width="100" />
+    <h3>{{ image.titre }}</h3>
+    <p>{{ image.description }}</p>
+    <p>Date Added: {{ image.dateAdded | date }}</p>
+    <p>Display Status: {{ image.displayStatus ? "Visible" : "Hidden" }}</p>
+    <a [routerLink]="['/edit', image.id]">Edit</a>
+    <button (click)="deleteImage(image.id)">Delete</button>
+  </li>
+</ul>
